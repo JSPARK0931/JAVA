@@ -1,0 +1,11 @@
+package study02;
+
+public class DeskLamp {
+	boolean isOn; //초기값 FALSE
+
+	public void turnOn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

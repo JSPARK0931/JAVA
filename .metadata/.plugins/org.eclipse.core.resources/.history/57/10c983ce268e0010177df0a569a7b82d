@@ -1,0 +1,16 @@
+package study02;
+
+public class Student {
+	// 멤버변수를 생성
+	int studentId;
+	String studentName;
+	String address;
+	
+	//메쏘드 (hip memory)
+	public void showInfo() {
+		System.out.println(studentName +", " + address);
+	}
+	
+	
+	
+}

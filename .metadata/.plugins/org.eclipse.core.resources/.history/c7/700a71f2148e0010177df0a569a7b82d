@@ -1,0 +1,10 @@
+package study01;
+
+public class TestClass {
+
+	public static void main(String[] args) {
+//		배열선언
+		String[] str = new String[10];
+		String[] str1 = {"han", "seoul"};
+	}
+}
