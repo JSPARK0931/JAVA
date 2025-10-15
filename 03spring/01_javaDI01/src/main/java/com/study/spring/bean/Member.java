@@ -1,9 +1,21 @@
 package com.study.spring.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Member {
 	
+	@Value("홍길동")
 	private String name;
+	
+	@Value("도사")
 	private String nickname;
+	
+	@Autowired
+	@Qualifier("printerA")
 	private Printer printer;
 
 	
