@@ -8,11 +8,6 @@
 </head>
 <body>
 <%-- <% out.println("안녕하세요"); %> --%>
-<div> 이름 : ${member.name} </div>
-<div> 나이 : ${member.age} </div>
-<div> 주소 : ${member.addr} </div>
-
-<a href="form">이전페이지</a>
-
+아이디는 ${Id} , 넘버는 ${num }
 </body>
 </html>
