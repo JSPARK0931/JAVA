@@ -76,7 +76,7 @@ public class StoreController {
 		return dao.findMenuAll();
 	}
 	
-	//api/menuSotrestoreId?id=1
+	//api/menuStoreId?id=1
 	@GetMapping("/api/menuStore")
 	public List<menuDto> menuStoreView(
 			@RequestParam("store_id") Long store_id
