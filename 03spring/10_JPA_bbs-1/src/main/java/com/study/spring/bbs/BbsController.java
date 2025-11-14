@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,4 +124,20 @@ public class BbsController {
 			log.info("수정완료");
 		}
 	}
+	
+	@DeleteMapping("/api/bbs/{id}")
+	public ResponseEntity<?> bbsDelete(
+			@PathVariable("id") Long id
+			) {
+		boolean data = bbsRepository.existsById(id);
+		if (!data) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		bbsRepository.deleteById(id);
+		
+		return ResponseEntity.ok("삭제완료");
+		
+	}
+	
 }

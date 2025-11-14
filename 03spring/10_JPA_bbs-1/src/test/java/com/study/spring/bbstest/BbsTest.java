@@ -17,14 +17,14 @@ public class BbsTest {
 	public void bbsInsert() {
 		Bbs bbs = new Bbs();
 		bbs.setName("부앙가");
-		bbs.setTitle("안녕하세요.");
-		bbs.setContent("MLS 우승합시다.");
+		bbs.setTitle("안녕하세요-1");
+		bbs.setContent("MLS 우승합시다.1");
 		bbsRepo.save(bbs);
 		
 		Bbs bbs2 = Bbs.builder()
 				.name("손흥민")
-				.title("LA FC")
-				.content("NICE ONE SONNY")
+				.title("LA FC -1")
+				.content("NICE ONE SONNY-1")
 				.build();
 		
 		bbsRepo.save(bbs2);
