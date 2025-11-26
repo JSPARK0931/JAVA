@@ -13,4 +13,5 @@ public class BoardListDto {
 	private String title;
 	private String name;
 	private LocalDateTime createdAt;
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.study.spring.board.dto.BoardListDto;
+import com.study.spring.board.dto.BoardListMemberDto;
 import com.study.spring.board.entity.Board;
 
 @Repository
@@ -40,4 +41,21 @@ public interface BoardRepository extends JpaRepository<Board, Long>{ // entity T
 
 	@Query("select b from Board b order by b.id desc")
 	Page<Board> findAllWithPage(Pageable pageable);
+
+	@Query("""
+			SELECT new com.study.spring.board.dto.BoardListMemberDto(
+				b.id,
+				b.title,
+				b.content,
+				m.name,
+				m.email,
+				b.createdAt
+			)
+			 FROM Board b
+			 JOIN b.member m			  
+		    ORDER BY b.id DESC
+			""")
+	List<BoardListMemberDto> findWithMemberById();
+	
+	// 			 JOIN b.member m OR JOIN Member m
 }

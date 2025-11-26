@@ -11,7 +11,7 @@ public class BbsService {
 	IbbsDao dao;
 	
 	public List<BbsDto> getList(){
-		return dao.ListDao();
+		return dao.listDao();
 	}
 	
 	public int count() {

@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public class IbbsDao {
+public interface IbbsDao {
 	@Select("select * from simple_bbs order by id desc")
-	public	List<BbsDto> ListDao();
+	public	List<BbsDto> listDao();
 	
 	@Select("select count(*) from simple_bbs")
 	public int countDao();
@@ -19,7 +19,7 @@ public class IbbsDao {
 	public BbsDto viewDao(String id);
 	
 	@Insert("insert into simple_bbs (writer,title,content) values (#{param1},#{param2},#{param3})") 
-	public int writeDao(String writer, String title, String content)
+	public int writeDao(String writer, String title, String content);
 	
 	@Delete("delete from simple_bbs WHERE id = #{0}")
 	public int deleteDao(String id);   
