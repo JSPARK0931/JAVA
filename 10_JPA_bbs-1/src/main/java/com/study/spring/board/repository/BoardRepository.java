@@ -1,0 +1,65 @@
+package com.study.spring.board.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.study.spring.board.dto.BoardListDto;
+import com.study.spring.board.dto.BoardListMemberDto;
+import com.study.spring.board.entity.Board;
+
+@Repository
+public interface BoardRepository extends JpaRepository<Board, Long>{
+	// entity Type, entity @id Type
+	
+	@Query("""
+			SELECT b
+			  FROM Board b
+			 ORDER BY b.id DESC
+			""")
+	List<Board> findAllOrderByIdDEsc();
+
+	@Query("SELECT b FROM Board b ORDER BY b.id DESC")
+	Page<Board> findAllWithPage(Pageable pageable);
+
+	@Query("""
+			SELECT new com.study.spring.board.dto.BoardListDto(
+				b.id,
+				b.title,
+				b.name,
+				b.createdAt
+			)
+			  FROM Board b
+			  ORDER BY b.id DESC
+			""")
+	List<BoardListDto> findAllListDto();
+
+	@Query("SELECT b FROM Board b WHERE b.id = :id")
+	Optional<Board> findBoard(@Param("id") Long id);
+	
+	
+	@Query("""
+			SELECT new com.study.spring.board.dto.BoardListMemberDto(
+			b.id,
+			b.title,
+			b.content,
+			m.name,
+			m.email,
+			b.createdAt
+		)
+		 FROM Board b
+		 JOIN b.member m			  
+	    ORDER BY b.id DESC
+		""")
+	List<BoardListMemberDto> findWithMemberById();
+	
+
+	
+
+}
