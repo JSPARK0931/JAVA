@@ -75,22 +75,42 @@ public class HospitalSumService {
 		return hospitalSumRepo.findHospitalSumByTopList(pageable);
 	}
 
-	public Page<HospitalSumDTO> getHospitalSumByTopListWithSearch(
+	public Page<HospitalSumDTO> getHospitalSumByTopListFindNameWithSearch(
 			Pageable pageable, 
-			String hName, 
-			String hAddr,
-			String parkYn) {
+			String h_name, 
+			String h_addr,
+			String h_park_yn) {
 
         // 검색 조건이 비어있으면 NULL로 변환하여 DB 쿼리에서 무시되도록 처리
-        String nameParam = StringUtils.hasText(hName) ? hName : null;
-        String addrParam = StringUtils.hasText(hAddr) ? hAddr : null;
-        String parkParam = StringUtils.hasText(parkYn) ? parkYn : null;
+        String nameParam = StringUtils.hasText(h_name) ? h_name : null;
+        String addrParam = StringUtils.hasText(h_addr) ? h_addr : null;
+        String parkParam = StringUtils.hasText(h_park_yn) ? h_park_yn : null;
 
-        return hospitalSumRepo.findHospitalSumBySearchAndTopList(
+        return hospitalSumRepo.findHospitalSumByTopListFindNameWithSearch(
                 pageable,
                 nameParam,
                 addrParam,
                 parkParam
+        );
+	}
+
+	public Page<HospitalSumDTO> getHospitalSumByTopLisFindParatWithSearch(
+			Pageable pageable, 
+			String para1, 
+			String para2,
+			String para3) 
+	{
+		// 검색 조건이 비어있으면 NULL로 변환하여 DB 쿼리에서 무시되도록 처리
+        // 검색 조건이 비어있으면 NULL로 변환하여 DB 쿼리에서 무시되도록 처리
+        String para1Param = StringUtils.hasText(para1) ? para1 : null;
+        String para2Param = StringUtils.hasText(para2) ? para2 : null;
+        String para3Param = StringUtils.hasText(para3) ? para3 : null;
+
+        return hospitalSumRepo.findHospitalSumByTopListFindParatWithSearch(
+                pageable,
+                para1Param,
+                para2Param,
+                para3Param
         );
 	}
 

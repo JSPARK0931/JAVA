@@ -155,23 +155,23 @@ public class HospitalSumController {
 	//--------------------------------------------------//
 	// ORDER BY : 병원평점평균,좋아요, 병원리뷰건수, 코멘트수		//
 	//--------------------------------------------------//
-	@GetMapping("/api/hs_find")
-	public ResponseEntity<Page<HospitalSumDTO>> getHospitalSumByTopList(
+	@GetMapping("/api/hs_find_name")
+	public ResponseEntity<Page<HospitalSumDTO>> getHospitalSumByTopListFindName(
 	            @RequestParam(name="page", defaultValue = "0") int page,
 	            @RequestParam(name="size", defaultValue = "5") int size,
 	            /* === 추가된 검색 파라미터 === */
-	            @RequestParam(name="hName", required = false) String hName,
-	            @RequestParam(name="hAddr", required = false) String hAddr,
-	            @RequestParam(name="parkYn", required = false) String parkYn
+	            @RequestParam(name="h_name", required = false) String h_name,
+	            @RequestParam(name="h_addr", required = false) String h_addr,
+	            @RequestParam(name="h_park_yn", required = false) String h_park_yn
 				){
 			Pageable pageable = PageRequest.of(page, size);
 
 	        // 수정된 Service 메소드 호출 (검색 조건 전달)
-	        Page<HospitalSumDTO> summaryPage = HSservice.getHospitalSumByTopListWithSearch(
+	        Page<HospitalSumDTO> summaryPage = HSservice.getHospitalSumByTopListFindNameWithSearch(
 	                pageable, 
-	                hName, 
-	                hAddr, 
-	                parkYn
+	                h_name, 
+	                h_addr, 
+	                h_park_yn
 	        );
 	        
 	        if (summaryPage.isEmpty()) {
@@ -181,5 +181,31 @@ public class HospitalSumController {
 	        return ResponseEntity.ok(summaryPage); // 결과가 있을 경우 200 OK와 데이터 반환
 	    }
 	
+	@GetMapping("/api/hs_find_para")
+	public ResponseEntity<Page<HospitalSumDTO>> getHospitalSumByTopListFindPara(
+	            @RequestParam(name="page", defaultValue = "0") int page,
+	            @RequestParam(name="size", defaultValue = "5") int size,
+	            /* === 추가된 검색 파라미터 === */
+	            @RequestParam(name="para1", required = false) String para1,
+	            @RequestParam(name="para2", required = false) String para2,
+	            @RequestParam(name="para3", required = false) String para3
+				){
+			Pageable pageable = PageRequest.of(page, size);
+
+	        // 수정된 Service 메소드 호출 (검색 조건 전달)
+	        Page<HospitalSumDTO> summaryPage = HSservice.getHospitalSumByTopLisFindParatWithSearch(
+	                pageable, 
+	                para1, 
+	                para2, 
+	                para3
+	        );
+	        
+	        if (summaryPage.isEmpty()) {
+	            return ResponseEntity.noContent().build(); // 결과가 없을 경우 204 No Content 반환
+	        }
+	            
+	        return ResponseEntity.ok(summaryPage); // 결과가 있을 경우 200 OK와 데이터 반환
+	    }
 	
+		
 }
