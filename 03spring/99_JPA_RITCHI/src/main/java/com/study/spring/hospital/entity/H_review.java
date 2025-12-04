@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.study.spring.user.entity.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,13 +18,18 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="h_review")
+@Table(name="h_review", uniqueConstraints = {
+		@UniqueConstraint(
+				name="h_review_a_id",
+				columnNames = {"a_id"}
+		)})
 @Data
 @NoArgsConstructor @AllArgsConstructor
 @Builder
@@ -31,19 +38,26 @@ public class H_review {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment 설정
 	private int r_id;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="a_id")
 	private H_appm h_appm;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="h_code")
 	private Hospital hospital;
 	
 	@OneToMany(mappedBy = "h_review")
-	private List<H_comment> h_comment = new ArrayList<>();
+	private List<H_comment> comments = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "h_review")
+	private List<H_like> likes = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name="h_user_id")
+	private User h_user;
 	
 	
-	private UUID h_user_id;
 	private String r_title;
 	private String r_content;
 	private int r_eval_pt;

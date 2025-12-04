@@ -1,7 +1,10 @@
 package com.study.spring.hospital.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import com.study.spring.user.entity.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,14 +27,20 @@ public class H_appm {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // autoincrement 설정
 	private int a_id;
+	
+	@OneToOne(mappedBy = "h_appm")
+	private H_review h_review;
 
 	@ManyToOne
 	@JoinColumn(name="h_code")
 	private Hospital hospital;
 	
-	private String a_date; // 수정 예정
+	@ManyToOne
+	@JoinColumn(name="a_user_id")
+	private User h_user;
+	
+	private String a_date;
 	private String a_content;
-	private UUID a_user_id; // 수정 예정
 	private String a_del_yn;
 	private String a_dia_name;
 	private String a_dia_content;

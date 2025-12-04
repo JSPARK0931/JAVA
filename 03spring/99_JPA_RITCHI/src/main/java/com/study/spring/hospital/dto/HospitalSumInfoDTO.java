@@ -36,5 +36,4 @@ public interface HospitalSumInfoDTO {
 		Double getAvg_eval_pt();
 		Long getComment_cnt();
 		Long getLike_cnt();
-
 }

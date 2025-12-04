@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -21,6 +23,11 @@ import lombok.NoArgsConstructor;
 public class Hospital_s {
 	@Id
 	private String h_code;
+	
+	@OneToOne
+	@MapsId // hospital_s.h_code와 연결될 hospital을 지정 (같은 primary key를 사용하도록 설정)
+	@JoinColumn(name="h_code") 
+	private Hospital hospital;
 	
 	private String h_mon_s;
 	private String h_mon_c;
