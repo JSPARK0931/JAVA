@@ -52,7 +52,7 @@ public class User {
 	private String addr;
 	private LocalDate birth;
 	private String text; 
-	private LocalDateTime createdAt;
+	private LocalDateTime createdAt;	
 	private LocalDateTime updatedAt;
 	
 	@PrePersist

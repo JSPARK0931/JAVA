@@ -10,6 +10,7 @@ public class WebCorsConfig implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/api/**")
 			.allowedOrigins("http://localhost:5173") // 5173만 허용
+			.allowedOriginPatterns("http://localhost:*") //모든 포트 허용
 			.allowedMethods("GET", "POST", "PUT", "DELETE")
 			.allowedHeaders("Content-Type", "Authorization")
 			.exposedHeaders("Location") // 헤더에 location값은 있어도 된다는 것을 의미 
