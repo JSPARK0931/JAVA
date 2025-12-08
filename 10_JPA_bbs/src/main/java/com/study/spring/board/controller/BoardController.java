@@ -7,103 +7,111 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.spring.board.dto.BoardCreateDto;
 import com.study.spring.board.dto.BoardListDto;
 import com.study.spring.board.dto.BoardListImageDto;
 import com.study.spring.board.dto.BoardListMemberDto;
 import com.study.spring.board.entity.Board;
 import com.study.spring.board.repository.BoardRepository;
-import com.study.spring.board.service.BoardService;
+import com.study.spring.board.service.BoardCreateService;
 import com.study.spring.board.service.BoardListService;
+import com.study.spring.board.service.BoardService;
 
 @RestController
 public class BoardController {
 	
 //	@Autowired
-//	BoardService boardservice;
+//	BoardService boardService;
 //	
+//
 //	@GetMapping("/api")
-//	public  String root() {
-//		return "test!!";
+//	public String root() {
+//		return "test";
 //	}
 //	
-//	//전체리스트
+//	
+//	// 전체리스트
 //	@GetMapping("/api/board")
 //	public List<Board> getBoardList(){
-//		return  boardservice.getBoardList();
-//	}
+//		return boardService.getBoardList();
+//	} 
 //	
-//	//페이징처리 requestParam page, size
+//	
+//	// 페이징처리  reaquestparam page=0, size=10
 //	@GetMapping("/api/boardpage")
 //	public Page<Board> getBoardPageList(
-//			@RequestParam(name = "page", defaultValue = "0") int page,
-//			@RequestParam(name = "size", defaultValue = "10") int size
+//			@RequestParam(name ="page",defaultValue = "0") int page,
+//			@RequestParam(name = "size",defaultValue = "10") int size
 //			) {
 //		
-//		return boardservice.getBoardPageList(page,size);
+//		
+//		return boardService.getBoardPageList(page,size);
 //	}
+// 
+//	
+//	
 //	
 //	@GetMapping("/api/boarddto")
 //	public List<BoardListDto> getBoardListDto(){
-//		return boardservice.getBoardDto();
+//		return boardService.getBoardDto();
 //	}
-//	
 //	
 //	@GetMapping("/api/board/{id}")
 //	public Board getBoardView(
 //			@PathVariable("id") Long id
 //			) {
-//		return boardservice.getBoard(id);
+//		return boardService.getBoard(id);
 //	}
 //	
+//	
 //	//글작성
-//	@PostMapping("api/board")
+//	@PostMapping("/api/board")
 //	public Board boardWrite(
 //			@RequestBody Board request
 //			) {
-//		
-//		return boardservice.boardWrite(request);
+//		return boardService.boardWrite(request);
 //	}
-//	
 	
-	// findAll
+	
 	@Autowired
 	BoardRepository boardRepository;
+	
 	@Autowired
 	BoardListService boardListService;
 	
-	//get, pagenation
-//	@GetMapping("/api/board")
-//	public List<Board> boardList() {
-//		return boardRepository.findAll();
-//	}
+	@Autowired
+	BoardCreateService boardCreateService;
+	
+	
+	//get,pagenation
 	
 	@GetMapping("/api/board")
 	public List<BoardListMemberDto> boardList() {
 		return boardListService.findWithMemberById();
 	}
 	
-	
 	@GetMapping("/api/boardi")
 	public List<BoardListImageDto> boardListImage() {
 		return boardListService.findWithImage();
 	}
 	
-	//Pagenation
 	// ~/api/boardp?page=0&size=10
 	@GetMapping("/api/boardp")
 	public Page<BoardListImageDto> boardListImagePage(
-			@RequestParam(name = "page", defaultValue= "0") int page,
-			@RequestParam(name = "size", defaultValue= "10") int size
+			@RequestParam(name="page",defaultValue = "0") int page,
+			@RequestParam(name="size",defaultValue = "10") int size
 			) {
 		
-//		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
+//		Pageable pageable = PageRequest.of(page, size,Sort.by(Sort.Direction.DESC,"id"));
 		Pageable pageable = PageRequest.of(page, size);
 		return boardListService.findWithImagePage(pageable);
 	}
@@ -113,10 +121,21 @@ public class BoardController {
 			@PathVariable("id") Long id
 			) {
 		return boardListService.findWithImageById(id);
-
 	}
+	
+	
+	
 	//post
+	@PostMapping("/api/board")
+	public ResponseEntity<?> boardCreate(
+			@ModelAttribute BoardCreateDto req
+			) {
+		Long id = boardCreateService.boardCreateData(req);
+		return ResponseEntity.ok("작성완료, id: " + id);
+	}
+
 	//update
 	//delete
-
+	
+	
 }

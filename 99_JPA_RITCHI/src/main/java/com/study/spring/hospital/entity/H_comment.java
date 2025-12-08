@@ -3,6 +3,8 @@ package com.study.spring.hospital.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.study.spring.user.entity.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,11 +29,15 @@ public class H_comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int c_id;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="r_id")
 	private H_review h_review;
 	
-	private UUID h_user_id;
+	@ManyToOne
+	@JoinColumn(name="h_user_id")
+	private User h_user;
+	
 	private String c_content;
 	private String c_del_yn;
 	private LocalDateTime createdAt;

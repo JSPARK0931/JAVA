@@ -15,7 +15,10 @@ import com.study.spring.board.entity.Board;
 import com.study.spring.board.entity.Image;
 import com.study.spring.board.repository.BoardRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class BoardListService {
 	
 	@Autowired
@@ -26,28 +29,9 @@ public class BoardListService {
 	}
 
 	public List<BoardListImageDto> findWithImage() {
+		
 		//entity
 		List<Board> boards = boardRepository.findWithImage();
-		return boards.stream()
-				.map(b->BoardListImageDto
-						.builder()
-						.title(b.getTitle())
-						.memberName(b.getMember().getName())
-						.memberEmail(b.getMember().getEmail())
-						.content(b.getContent())
-						.createdAt(b.getCreatedAt())
-						.images(
-								b.getImages()
-								.stream()
-								.map(img-> new ImageDto(
-										img.getId(),
-										img.getImageOrder(),
-										img.getFileName()
-										))
-								.toList()
-								)
-						.build())
-				.toList();
 		
 //		return boards.stream()
 //				.map(b->BoardListImageDto
@@ -60,17 +44,39 @@ public class BoardListService {
 //						.images(null)
 //						.build())
 //				.toList();
+		
 // boards.stream().map(()->{}).toList();
 // Page<>.map(()->{});
 // dto.builder().build();
 		
+		
+		return boards.stream()
+				.map(b->BoardListImageDto
+						.builder()
+						.title(b.getTitle())
+						.memberName(b.getMember().getName())
+						.memberEmail(b.getMember().getEmail())
+						.content(b.getContent())
+						.createdAt(b.getCreatedAt())
+						.images(b.getImages().stream()
+								.map(img -> new ImageDto(
+										img.getId(),
+										img.getImageOrder(),
+										img.getFileName(),
+										img.getOriginalFileName()
+										))
+								.toList())
+						.build())
+				.toList();
 	}
 
 	public Page<BoardListImageDto> findWithImagePage(Pageable pageable) {
+
 		//entity
 		Page<Board> page = boardRepository.findWithImagePage(pageable);
 		
-		//return entity -> dto -> json
+		
+		//return entity -> dto - json
 		return page.map(
 				p -> BoardListImageDto.builder()
 				.id(p.getId())
@@ -81,13 +87,13 @@ public class BoardListService {
 				.createdAt(p.getCreatedAt())
 				.imageCount(p.getImages().size())
 				.images(p.getImages().stream()
-						.map( 
-							img -> new ImageDto(
-									img.getId(),
-									img.getImageOrder(),
-									img.getFileName()
-									)	
-								
+						.map(
+								img -> new ImageDto(
+										img.getId(),
+										img.getImageOrder(),
+										img.getFileName(),
+										img.getOriginalFileName()
+										)
 								)
 						.toList())
 				.build()
@@ -96,10 +102,12 @@ public class BoardListService {
 
 	public BoardListImageDto findWithImageById(Long id) {
 		
-		//entity
+		//entity 
 		Board b = boardRepository.findWithImageById(id);
 		
-		//return entity -> dto
+		
+		
+		//entity -> dto
 		return BoardListImageDto.builder()
 				.id(b.getId())
 				.title(b.getTitle())
@@ -107,18 +115,31 @@ public class BoardListService {
 				.memberName(b.getMember().getName())
 				.memberEmail(b.getMember().getEmail())
 				.createdAt(b.getCreatedAt())
+				.imageCount(b.getImages().size())
 				.images(b.getImages().stream()
 //						.sorted(Comparator.comparing(image -> image.getImageOrder()))
-						.sorted(Comparator.comparing(Image::getImageOrder).reversed())
+						.sorted(Comparator.comparing(Image::getImageOrder))
 						.map(
-							img -> new ImageDto(
-									img.getId(),
-									img.getImageOrder(),
-									img.getFileName()
-									)
+								img -> new ImageDto(
+										img.getId(),
+										img.getImageOrder(),
+										img.getFileName(),
+										img.getOriginalFileName()
+										)
 								)
 						.toList())
 				.build();
 	}
 
-}
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+}	

@@ -27,15 +27,14 @@ import lombok.NoArgsConstructor;
 public class Hospital {
 	@Id
 	private String h_code;
-	
-	@OneToOne @MapsId // hospital.h_code와 연결될 hospital_s를 지정 (같은 primary key를 사용하도록 설정)
+	@OneToOne(mappedBy = "hospital") 
 	private Hospital_s hospital_s;
+			
+	@OneToMany(mappedBy = "hospital") // 하나의 병원에 등록된 모든 리뷰를 불러와야 하기 때문에
+	private List<H_review> reviews = new ArrayList<>();
 	
-//	@OneToMany(mappedBy = "hospital") // 하나의 병원에 등록된 모든 예약을 불러야와야 함
-//	private List<H_appm> h_appms = new ArrayList<>();
-	
-//	@OneToMany(mappedBy = "hospital") // 하나의 병원에 등록된 모든 리뷰를 불러와야 하기 때문에
-//	private List<H_review> h_reviews = new ArrayList<>();
+	@OneToMany(mappedBy = "hospital")
+	private List<H_appm> appms = new ArrayList<>();
 	
 		
 	@Column
