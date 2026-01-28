@@ -60,8 +60,8 @@ public class H_review {
 	
 	private String r_title;
 	private String r_content;
-	private int r_eval_pt;
-	private int r_views;
+	private Integer r_eval_pt;
+	private Integer r_views;
 	private String r_del_yn;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;

@@ -13,6 +13,6 @@ import lombok.Data;
 public class H_ReviewLikeDto {
 	private int r_id;
 	private List<LikeDto> likes;
-	private int likeCount;
+	private Integer likeCount;
 	private LocalDateTime createdAt;
 }

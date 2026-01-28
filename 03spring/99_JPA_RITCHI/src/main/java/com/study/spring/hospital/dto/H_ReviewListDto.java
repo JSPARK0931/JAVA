@@ -15,6 +15,6 @@ public class H_ReviewListDto {
 	private String h_code;
 	private String h_name;
 	private List<ReviewDto> reviews;
-	private int reviewCount;
+	private Integer reviewCount;
 	private LocalDateTime createdAt;
 }

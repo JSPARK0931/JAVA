@@ -1,13 +1,16 @@
 package com.study.spring.hospital.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.study.spring.hospital.dto.H_ReviewAppmDto;
 import com.study.spring.hospital.dto.H_ReviewCommentDto;
+import com.study.spring.hospital.dto.H_ReviewListDto;
 import com.study.spring.hospital.dto.HospitalDto;
 import com.study.spring.hospital.entity.H_review;
 //import com.study.spring.hospital.dto.H_ReviewListDto;
@@ -139,4 +142,17 @@ public interface HospitalRepository extends JpaRepository<Hospital, String> {
 			order by u.id desc
 			""")
 	List<User> findLikeWithUser();
+
+
+	@Query("""
+			select h
+			from Hospital h
+			join h.reviews
+			where h.h_code = :h_code
+			order by h.h_code desc
+			""")
+	Hospital findWithReviews(@Param("h_code") String h_code);
+
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.appms WHERE u.id = :id")
+	User findAppmWithUserById(@Param("id") UUID id);
 }

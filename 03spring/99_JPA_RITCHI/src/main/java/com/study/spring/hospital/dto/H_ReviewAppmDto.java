@@ -14,7 +14,7 @@ public class H_ReviewAppmDto {
 	private int r_id;
 	private String r_title;
 	private String r_content;
-	private int r_views;
+	private Integer r_views;
 	private String a_date;
 	private String a_content;
 	private String a_dia_name;

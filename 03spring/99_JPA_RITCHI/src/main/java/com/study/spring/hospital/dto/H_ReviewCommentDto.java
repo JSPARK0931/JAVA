@@ -16,10 +16,10 @@ public class H_ReviewCommentDto {
 	private int r_id;
 	private String r_title;
 	private String r_content;
-	private int r_eval_pt;
-	private int r_views;
+	private Integer r_eval_pt;
+	private Integer r_views;
 	private List<CommentDto> comments;
-	private int commentCount;
+	private Integer commentCount;
 	private LocalDateTime createdAt;
 }
 
