@@ -6,8 +6,9 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,20 +33,23 @@ public class Bbs_Risk {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String table_id; // 테이블명
-	private String bbs_div; // 테이블분류
-	private Integer bbs_id; // 게시물id
+	@Column(name="table_id")
+	private String tableId; // 테이블명
+	@Column(name="bbs_div")
+	private String bbsDiv; // 테이블분류
+	@Column(name="bbs_id")
+	private Integer bbsId; // 게시물id
 	private String content; // 게시물 내용
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable = false)
-	private User user;
+	@JoinColumn(name="member_id", nullable = false)
+	private Member memberId;
 
 	private String action; // 조치내용
 
 	@CreationTimestamp
-	private Timestamp created_at;
+	private Timestamp createdAt;
 
 	@UpdateTimestamp
-	private LocalDateTime updated_at;
+	private LocalDateTime updatedAt;
 }

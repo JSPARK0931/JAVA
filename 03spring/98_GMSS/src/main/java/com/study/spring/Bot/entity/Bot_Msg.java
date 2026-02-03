@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,8 +39,8 @@ public class Bot_Msg {
 	private Integer session_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member memberId;
 	
 	/**
      * 3. 봇의 응답 데이터 (jsonb)

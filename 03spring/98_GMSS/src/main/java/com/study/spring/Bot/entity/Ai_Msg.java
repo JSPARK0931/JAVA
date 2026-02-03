@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,13 +36,13 @@ public class Ai_Msg {
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable = false)
-	private User user;
+	@JoinColumn(name="member_id", nullable = false)
+	private Member memberId;
 	
 	@JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "msg_data", columnDefinition = "jsonb")
     private Map<String, Object> msgData;
 	
 	@CreationTimestamp
-	private LocalDateTime created_at;
+	private LocalDateTime createdAt;
 }

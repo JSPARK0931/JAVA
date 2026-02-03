@@ -1,4 +1,4 @@
-package com.study.spring.user.entity; // entity 패키지 생성
+package com.study.spring.Member.entity; // entity 패키지 생성
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

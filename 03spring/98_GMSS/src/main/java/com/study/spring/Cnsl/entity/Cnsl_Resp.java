@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,8 +29,8 @@ import lombok.NoArgsConstructor;
 public class Cnsl_Resp {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer resp_id;
+    @Column(name="resp_id")
+    private Integer respId;
 	
 	// (상담신청과 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,12 +39,13 @@ public class Cnsl_Resp {
 
     // (사용자와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", nullable = false)
-    private User user;
+    @JoinColumn(name="member_id", nullable = false)
+    private Member memmberId;
 	
 	private String content;
 	
-	private String del_yn;
+	@Column(name="del_yn")
+	private String delYn;
 	
 	@CreationTimestamp
     @Column(updatable = false)

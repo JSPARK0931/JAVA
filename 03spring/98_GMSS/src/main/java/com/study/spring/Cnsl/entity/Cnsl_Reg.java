@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,34 +31,46 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Cnsl_Reg {
 	@Id
-	@Column
+	@Column(name="cnsl_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cnsl_id; // 상담 고유 ID (PK)
+	private Integer cnslId; // 상담 고유 ID (PK)
 	
 	// 상담 신청자 (User와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member memberId;
     
     // 상담사 (User와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cnsler_id")
-    private User cnsler;
+    private Member cnslerId;
     
-	private String cnsl_tp; // 상담 유형 (Code 테이블 'cnsl_tp' 매핑)
-	private String cnsl_cate; // 상담 카테고리 (Code 테이블 'cnsl_cate' 매핑)
-	private LocalDate cnsl_dt; // 상담일자
-	private LocalTime cnsl_start_time; // 상담시작시간
-	private LocalTime cnsl_end_time; // 상담종료시간
-	private String cnsl_stat; // 상담상태
-	private String cnsl_title; // 상담제목
-	private String cnsl_content; // 상담신청내용
+    @Column(name="cnsl_tp")
+	private String cnslTp; // 상담 유형 (Code 테이블 'cnsl_tp' 매핑)
+    @Column(name="cnsl_cate")
+	private String cnslCate; // 상담 카테고리 (Code 테이블 'cnsl_cate' 매핑)
+    @Column(name="cnsl_dt")
+	private LocalDate cnslDt; // 상담일자
+    @Column(name="cnsl_start_time")
+	private LocalTime cnslStartTime; // 상담시작시간
+    @Column(name="cnsl_end_time")
+	private LocalTime cnslEndTime; // 상담종료시간
+    @Column(name="cnsl_stat")
+	private String cnslStat; // 상담상태
+    @Column(name="cnsl_title")
+	private String cnslTitle; // 상담제목
+    @Column(name="cnsl_content")
+	private String cnslContent; // 상담신청내용
 	
-	private String cnsl_todo_yn; // 상담진행여부
+    @Column(name="cnsl_todo_yn")
+	private String cnslTodoYn; // 상담진행여부
+    
+    @Column(name="del_yn")
+	private String delYn; // 삭제여부
 	
 	@CreationTimestamp
-	private LocalDateTime created_At;
+	private LocalDateTime createdAt;
 	
 	@UpdateTimestamp
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 }

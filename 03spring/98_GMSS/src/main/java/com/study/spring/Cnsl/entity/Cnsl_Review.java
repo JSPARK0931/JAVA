@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,20 +30,23 @@ import lombok.NoArgsConstructor;
 public class Cnsl_Review {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer review_id;
+    @Column(name="review_id")
+    private Integer reviewId;
 	
 	// 1. 상담 신청자 (User와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id",nullable = false)
-    private User user;
+    @JoinColumn(name="member_id",nullable = false)
+    private Member memberId;
     
     // 2. 상담사 (User와 N:1, 작성자와 별개로 상담사 역할을 하는 유저)
     // 상담사 ID의경우 Cnsl_reg의 cnslr_id를 사용하면되므로 삭제함 
     
 	private String title;
 	private String content;
-	private Integer eval_pt;
+	@Column(name="eval_pt")
+	private Integer evalPt;
+	@Column(name="del_yn")
+	private Integer delYn;
 
 	@CreationTimestamp
 	private LocalDateTime created_at;

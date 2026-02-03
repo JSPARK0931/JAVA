@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,15 +35,16 @@ public class Bbs_Comment {
 	// (게시글과 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="bbs_id")
-    private Bbs bbs;
+    private Bbs bbsId;
 
     // (사용자와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", nullable = false)
-    private User user;
+    @JoinColumn(name="member_id", nullable = false)
+    private Member memberId;
 
 	private String content;
-	private String del_yn;
+	@Column(name="del_yn")
+	private String delYn;
 	
 	@CreationTimestamp
 	private LocalDateTime created_at;

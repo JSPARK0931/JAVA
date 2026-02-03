@@ -1,8 +1,8 @@
-package com.study.spring.user.repository;
+package com.study.spring.Member.repository;
 
-import com.study.spring.user.dto.UserInfoEmailCheckDTO;
-import com.study.spring.user.dto.UserInfoNicknameCheckDTO;
-import com.study.spring.user.entity.AuthUser; // 엔티티 임포트
+import com.study.spring.Member.dto.MemberInfoEmailCheckDTO;
+import com.study.spring.Member.dto.MemberInfoNicknameCheckDTO;
+import com.study.spring.Member.entity.AuthUser; // 엔티티 임포트
 import org.springframework.data.jpa.repository.JpaRepository; // JpaRepository 사용 가능
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserInfoRepository extends JpaRepository<AuthUser, UUID> {
+public interface MemberInfoRepository extends JpaRepository<AuthUser, UUID> {
 
     // DTO 인터페이스를 반환 타입으로 지정
     @Query(value = """
@@ -19,14 +19,14 @@ public interface UserInfoRepository extends JpaRepository<AuthUser, UUID> {
             WHERE email = :email
             """,
             nativeQuery = true)
-    Optional<UserInfoEmailCheckDTO> userInfoEmailCheckYn(@Param("email") String email);
+    Optional<MemberInfoEmailCheckDTO> memberInfoEmailCheckYn(@Param("email") String email);
     
     // DTO 인터페이스를 반환 타입으로 지정
     @Query(value = """
             SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE 'N' END AS userInfoNicknameCheckYn
-            FROM public.user
+            FROM member
             WHERE nickname = :nickname
             """,
             nativeQuery = true)
-    Optional<UserInfoNicknameCheckDTO> userInfoNicknameCheckYn(@Param("nickname") String nickname);
+    Optional<MemberInfoNicknameCheckDTO> memberInfoNicknameCheckYn(@Param("nickname") String nickname);
 }

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,19 +29,19 @@ import lombok.NoArgsConstructor;
 public class Chat_Msg {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-	private Integer chat_id;
+    @Column(name="chat_id")
+	private Integer chatId;
 	
-	@Column(nullable = false)
-	private Integer cnsl_id;
+	@Column(name="cnsl_id", nullable = false)
+	private Integer cnslId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
-	private User user;
+	@JoinColumn(name="member_id")
+	private Member memberId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="cnsler_id")
-	private User cnsler;
+	private Member cnslerId;
 	
 	@Column(nullable = false)
 	private String role;

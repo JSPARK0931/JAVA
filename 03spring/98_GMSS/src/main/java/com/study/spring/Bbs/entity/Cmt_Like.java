@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.user.entity.User;
+import com.study.spring.Member.entity.Member;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,17 +29,19 @@ import lombok.NoArgsConstructor;
 public class Cmt_Like {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer clike_id;
+	@Column(name="clike_id")
+	private Integer clikeId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="cmt_id", nullable = false)
-	private Bbs_Comment cmt;
+	private Bbs_Comment cmtId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id",nullable = false)
-	private User user;
+	@JoinColumn(name="member_id",nullable = false)
+	private Member memberId;
 
-	private boolean is_like;
+	@Column(name="is_like")
+	private boolean isLike;
 
 	@CreationTimestamp
 	private LocalDateTime createdAt;

@@ -28,8 +28,8 @@ import lombok.NoArgsConstructor;
 public class Bbs {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // pk, increment 대응
-    @Column
-    private Integer bbs_id;
+    @Column(name="bbs_id")
+    private Integer bbsId;
 
 	@Column(nullable = false)
     private String bbs_div; // (Code 테이블 'bbs_div' 매핑)
@@ -38,9 +38,12 @@ public class Bbs {
 	private String title;
 	private String content;
 	private Integer views;
-	private String img_name;
-	private String img_url;	
-	private String del_yn;
+	@Column(name="img_name")
+	private String imgName;
+	@Column(name="img_url")
+	private String imgUrl;	
+	@Column(name="del_yn")
+	private String delYn;
 	
 	@CreationTimestamp
     @Column

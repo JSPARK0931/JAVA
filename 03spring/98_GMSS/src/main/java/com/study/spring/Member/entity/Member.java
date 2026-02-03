@@ -1,4 +1,4 @@
-package com.study.spring.user.entity;
+package com.study.spring.Member.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,15 +16,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "\"user\"")
+//@Table(name = "\"user\"")
+@Table(name = "member", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Member {
 	@Id
-	@Column(name = "user_id", columnDefinition ="UUID") 
-	private UUID userId; // (UUID)
+	@Column(name = "member_id", columnDefinition ="UUID") 
+	private UUID memberId; // (UUID)
 	
 	private String role; // 1. 상담자, 2. 상담사, 3. 관리자 (Code 테이블 'role' 매핑 )
 
