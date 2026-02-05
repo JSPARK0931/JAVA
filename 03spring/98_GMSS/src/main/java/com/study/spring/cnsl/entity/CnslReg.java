@@ -1,4 +1,4 @@
-package com.study.spring.Cnsl.entity;
+package com.study.spring.cnsl.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class Cnsl_Reg {
+public class CnslReg {
 	@Id
 	@Column(name="cnsl_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

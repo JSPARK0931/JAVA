@@ -1,12 +1,13 @@
-package com.study.spring.Bbs.entity;
+package com.study.spring.bot.entity;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,33 +24,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "bbs_risk")
+@Table(name = "ai_msg")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Bbs_Risk {
+public class AiMsg {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private Integer id;
-
-	@Column(name="table_id")
-	private String tableId; // 테이블명
-	@Column(name="bbs_div")
-	private String bbsDiv; // 테이블분류
-	@Column(name="bbs_id")
-	private Integer bbsId; // 게시물id
-	private String content; // 게시물 내용
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id", nullable = false)
 	private Member memberId;
-
-	private String action; // 조치내용
-
+	
+	@JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "msg_data", columnDefinition = "jsonb")
+    private Map<String, Object> msgData;
+	
+	private String summery;
+	
 	@CreationTimestamp
-	private Timestamp createdAt;
-
-	@UpdateTimestamp
-	private LocalDateTime updatedAt;
+	private LocalDateTime createdAt;
 }

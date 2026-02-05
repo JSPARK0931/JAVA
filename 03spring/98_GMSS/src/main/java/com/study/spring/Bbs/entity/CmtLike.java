@@ -1,10 +1,10 @@
-package com.study.spring.Bbs.entity;
+package com.study.spring.bbs.entity;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,31 +21,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "bbs_comment")
+@Table(name = "cmt_like")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Bbs_Comment {
+public class CmtLike {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer cmt_id;
-	
-	// (게시글과 N:1)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="bbs_id")
-    private Bbs bbsId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="clike_id")
+	private Integer clikeId;
 
-    // (사용자와 N:1)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id", nullable = false)
-    private Member memberId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cmt_id", nullable = false)
+	private BbsComment cmtId;
 
-	private String content;
-	@Column(name="del_yn")
-	private String delYn;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="member_id",nullable = false)
+	private Member memberId;
+
+	@Column(name="is_like")
+	private boolean isLike;
+
 	@CreationTimestamp
-	private LocalDateTime created_at;
+	private LocalDateTime createdAt;
 }

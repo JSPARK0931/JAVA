@@ -1,11 +1,11 @@
-package com.study.spring.Cnsl.entity;
+package com.study.spring.cnsl.entity;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cnsl_Review {
+public class CnslReview {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="review_id")

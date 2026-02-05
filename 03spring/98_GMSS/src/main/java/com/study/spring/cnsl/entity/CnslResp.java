@@ -1,10 +1,10 @@
-package com.study.spring.Cnsl.entity;
+package com.study.spring.cnsl.entity;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cnsl_Resp {
+public class CnslResp {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="resp_id")
@@ -35,7 +35,7 @@ public class Cnsl_Resp {
 	// (상담신청과 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cnsl_id" ,nullable = false)
-    private Cnsl_Reg cnslId;
+    private CnslReg cnslId;
 
     // (사용자와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)

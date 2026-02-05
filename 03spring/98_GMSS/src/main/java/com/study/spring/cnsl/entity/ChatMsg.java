@@ -1,10 +1,10 @@
-package com.study.spring.Bbs.entity;
+package com.study.spring.cnsl.entity;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,27 +21,35 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "bbs_like")
+@Table(name = "chat_msg")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Bbs_Like {
+public class ChatMsg {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="like_id")
-	private Integer likeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="chat_id")
+	private Integer chatId;
+	
+	@Column(name="cnsl_id", nullable = false)
+	private Integer cnslId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="bbs_id", nullable= false)
-	private Bbs bbsId;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="member_id", nullable = false)
+	@JoinColumn(name="member_id")
 	private Member memberId;
 	
-	@Column(name="is_like")
-	private Boolean isLike;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cnsler_id")
+	private Member cnslerId;
+	
+	@Column(nullable = false)
+	private String role;
+	
+	@Column(nullable = false)
+	private String content;
+	
+	private String summery;
 	
 	@CreationTimestamp
 	private LocalDateTime created_at;

@@ -1,13 +1,11 @@
-package com.study.spring.Bot.entity;
+package com.study.spring.cnslInfo.entity;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,25 +22,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ai_msg")
+@Table(name = "cnsler_scdl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Ai_Msg {
+public class CnslerScdl {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name="id")
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id", nullable = false)
 	private Member memberId;
 	
-	@JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "msg_data", columnDefinition = "jsonb")
-    private Map<String, Object> msgData;
+	@Column(name="start_time")
+	private String startTime;
+	
+	@Column(name="end_time")
+	private String endTime;
+	private Integer interval;
 	
 	@CreationTimestamp
 	private LocalDateTime createdAt;
+	@UpdateTimestamp	
+	private LocalDateTime updatedAt;
 }

@@ -1,4 +1,4 @@
-package com.study.spring.Bot.entity;
+package com.study.spring.bot.entity;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Bot_Msg {
+public class BotMsg {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -50,7 +50,8 @@ public class Bot_Msg {
     @Column(columnDefinition = "jsonb")
     private Map<String, Object> msg_data;
 	
-	
+	private String summery;
+    
 	@CreationTimestamp
 	private LocalDateTime created_at;
 }

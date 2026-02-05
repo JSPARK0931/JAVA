@@ -1,10 +1,12 @@
-package com.study.spring.Bbs.entity;
+package com.study.spring.cnslInfo.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import com.study.spring.Member.entity.Member;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,28 +23,35 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "cmt_like")
+@Table(name = "cnsl_info")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cmt_Like {
+public class CnslInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="clike_id")
-	private Integer clikeId;
-
+	@Column(name="id")
+	private Integer id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cmt_id", nullable = false)
-	private Bbs_Comment cmtId;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="member_id",nullable = false)
+	@JoinColumn(name="member_id", nullable = false)
 	private Member memberId;
-
-	@Column(name="is_like")
-	private boolean isLike;
-
+	
+	private Date apply_dt;
+	
+	@Column(name="cnsl_tp")
+	private String cnslTp;
+	
+	@Column(name="cnsl_price")
+	private Integer cnslPrice;
+	
+	@Column(name="cnsl_rate")
+	private float cnslRate;
+	
 	@CreationTimestamp
 	private LocalDateTime createdAt;
+	@UpdateTimestamp	
+	private LocalDateTime updatedAt;
+
 }

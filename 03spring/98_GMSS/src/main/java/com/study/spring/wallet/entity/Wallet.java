@@ -1,11 +1,14 @@
-package com.study.spring.member.entity;
+package com.study.spring.wallet.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import com.study.spring.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -15,29 +18,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-//@Table(name = "\"user\"")
-@Table(name = "member", schema = "public")
+@Table(name = "wallet")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member {
+public class Wallet {
 	@Id
-	@Column(name = "member_id") 
-	private String memberId; // (UUID)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+	private Member member;  
 	
-	private String role; // 1. 상담자, 2. 상담사, 3. 관리자 (Code 테이블 'role' 매핑 )
+	@Column(name = "curr_point")
+	private long currPoint; // 현재 포인트
 
-	// nullable=false → 무조건 값 있어야 함
-	@Column(nullable = false, unique = true)
-	private String nickname;
-	private String gender; // M/F (Code 테이블 'gender' 매핑)
-	private String mbti; 
-	private LocalDate birth; 
-	private String persona;
-    // 상담사 전용 정보
-    private String profile;
-    private String text;
 	private LocalDateTime updatedAt;
 	private LocalDateTime createdAt;
 	

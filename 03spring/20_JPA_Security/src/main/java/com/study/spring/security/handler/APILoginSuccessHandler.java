@@ -35,7 +35,7 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler{
 		Map<String, Object> claims = memberDto.getClaims();
 		
 		// access , refresh token
-		// claims에 넣어서 accesstoken : 10분동안 사용 : 
+		// claims에 넣어서 access token : 10분동안 사용 : 
 		// refresh token : 60 * 24 : HTTPonly cookie값
 		claims.put("accessToken", JWTUtil.generateToken(claims, 10));
 		claims.put("refreshToken", JWTUtil.generateToken(claims, 60*24));

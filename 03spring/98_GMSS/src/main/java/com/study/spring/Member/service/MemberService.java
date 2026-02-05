@@ -1,6 +1,6 @@
-package com.study.spring.Member.service;
+package com.study.spring.member.service;
 
-import com.study.spring.Member.repository.MemberRepository;
+import com.study.spring.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
