@@ -50,7 +50,7 @@ public class BotMsg {
     @Column(columnDefinition = "jsonb")
     private Map<String, Object> msg_data;
 	
-	private String summery;
+	private String summary;
     
 	@CreationTimestamp
 	private LocalDateTime created_at;

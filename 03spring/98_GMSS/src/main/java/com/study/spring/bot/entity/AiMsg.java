@@ -43,7 +43,7 @@ public class AiMsg {
     @Column(name = "msg_data", columnDefinition = "jsonb")
     private Map<String, Object> msgData;
 	
-	private String summery;
+	private String summary;
 	
 	@CreationTimestamp
 	private LocalDateTime createdAt;

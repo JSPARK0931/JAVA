@@ -1,4 +1,4 @@
-package com.study.spring.cnsl.entity;
+package com.study.spring.bot.entity;
 
 import java.time.LocalDateTime;
 
@@ -49,7 +49,7 @@ public class ChatMsg {
 	@Column(nullable = false)
 	private String content;
 	
-	private String summery;
+	private String summary;
 	
 	@CreationTimestamp
 	private LocalDateTime created_at;

@@ -1,10 +1,23 @@
 package com.study.spring.member.repository;
 
-import com.study.spring.member.entity.Member;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.UUID;
+import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member, String> {
-    // 닉네임 중복 확인 로직 (Spring Data JPA가 쿼리 자동 생성)
-    boolean existsByNickname(String nickname);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.study.spring.member.entity.Member;
+
+@Repository
+public interface MemberRepository extends JpaRepository<Member, String>{
+	
+//	member_id를 Email로 검증함
+	@Query("""
+			select m from Member
+			m left join fetch m.memberRoleList
+			where m.memberId = :email
+			""")
+	Optional<Member> findByEmail(@Param("email") String email);
+	
 }

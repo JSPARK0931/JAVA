@@ -27,7 +27,7 @@ public class Wallet {
 	@Id
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-	private Member member;  
+	private Member memberId;  
 	
 	@Column(name = "curr_point")
 	private long currPoint; // 현재 포인트
