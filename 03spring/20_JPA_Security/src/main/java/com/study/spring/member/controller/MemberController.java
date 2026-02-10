@@ -6,11 +6,14 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.spring.member.dto.MemberDto;
 import com.study.spring.util.JWTUtil;
 
 import jakarta.servlet.http.Cookie;
@@ -25,6 +28,23 @@ public class MemberController {
 	@GetMapping("/")
 	public String hello() {
 		return "hello";
+	}
+	
+	@GetMapping("/api/user/info")
+	public Map<String, Object> getUserInfo(
+			@AuthenticationPrincipal MemberDto principal,
+			Authentication authentication
+			) {
+		if (principal == null) {
+			return Map.of("athentication",false,"message","인증되지 않은 사용자입니다.");
+		}
+		
+		return Map.of(
+				"athntication",true,
+				"username",principal.getEmail(),
+				"authorities",authentication.getAuthorities(),
+				"message","jwt인증 통과 완료"
+				);
 	}
 	
 
