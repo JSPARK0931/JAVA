@@ -23,23 +23,44 @@ public class MemberTest {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+//	@Test
+//	public void testInsertMember( ) {
+//		
+//		for (int i= 0;i<10;i++) {
+//			Member member = Member.builder()
+//					.memberId("user" + i + "@naver.com")
+//					.pw(passwordEncoder.encode("1111"))
+//					.nickname("user" + i)
+//					.build();
+//			
+//			member.addRole(MemberRole.USER);
+//			if (i>=5) {
+//				member.addRole(MemberRole.SYSTEM);
+//			}
+//			if (i>=8) {
+//				member.addRole(MemberRole.ADMIN);
+//			}
+//			
+//			memberRepository.save(member);
+//		}
+//	}
 	@Test
-	public void testInsertMember( ) {
+	public void testInsertEtcMember( ) {
 		
 		for (int i= 0;i<10;i++) {
 			Member member = Member.builder()
-					.memberId("user" + i + "@naver.com")
+					.memberId("cnsler" + i + "@gmss.com")
 					.pw(passwordEncoder.encode("1111"))
-					.nickname("user" + i)
+					.nickname("상담사" + i)
 					.build();
-			
-			member.addRole(MemberRole.USER);
-			if (i>=5) {
-				member.addRole(MemberRole.SYSTEM);
-			}
-			if (i>=8) {
-				member.addRole(MemberRole.ADMIN);
-			}
+			member.addRole(MemberRole.SYSTEM);		
+//			member.addRole(MemberRole.USER);
+//			if (i>=5) {
+//				member.addRole(MemberRole.SYSTEM);
+//			}
+//			if (i>=8) {
+//				member.addRole(MemberRole.ADMIN);
+//			}
 			
 			memberRepository.save(member);
 		}

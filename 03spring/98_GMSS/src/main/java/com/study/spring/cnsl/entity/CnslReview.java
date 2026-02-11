@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +34,10 @@ public class CnslReview {
     @Column(name="review_id")
     private Integer reviewId;
 	
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cnsl_id",nullable = false)
+	private CnslReg cnslId;
+	
 	// 1. 상담 신청자 (User와 N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id",nullable = false)
@@ -46,7 +51,7 @@ public class CnslReview {
 	@Column(name="eval_pt")
 	private Integer evalPt;
 	@Column(name="del_yn")
-	private Integer delYn;
+	private String delYn;
 
 	@CreationTimestamp
 	private LocalDateTime created_at;
