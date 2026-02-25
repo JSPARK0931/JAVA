@@ -48,5 +48,4 @@ public class JWTUtil {
 
 		return claim;
 	}
-		
 }

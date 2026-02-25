@@ -36,11 +36,28 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		// access , refresh token
 		// claims에 넣어서 access token : 10분동안 사용 : 
-		// refresh token : 60 * 24 : HTTPonly cookie값
-		claims.put("accessToken", JWTUtil.generateToken(claims, 10));
-		claims.put("refreshToken", JWTUtil.generateToken(claims, 60*24));
+//		// refresh token : 60 * 24 : HTTPonly cookie값
+//		claims.put("accessToken", JWTUtil.generateToken(claims, 10));
+//		claims.put("refreshToken", JWTUtil.generateToken(claims, 60*24));
+		
+		String accessToken =  JWTUtil.generateToken(claims, 10);;
+		String refreshToken = JWTUtil.generateToken(claims, 60*24);
+		
+		// HttpOn;y 설정
+		// browser에 refreshToken Cookie로 저장, httponly로 접근가능하도록
+		jakarta.servlet.http.Cookie refreshTokenCookie = 
+				new jakarta.servlet.http.Cookie("refreshToken", refreshToken);
+		refreshTokenCookie.setHttpOnly(true);
+		refreshTokenCookie.setPath("/");
+		refreshTokenCookie.setMaxAge(60*60*24);
+		// 사이트 교차시 보안수준 정의 Strict, Lax, None : get을 사용하기위해 보통 Lax 사용
+		refreshTokenCookie.setAttribute("SameSite", "Lax"); //SameSite = Strict : 엄격한, SameSite = Lax : 느슨한 , None :앖음
+		response.addCookie(refreshTokenCookie);
+		
+		claims.put("accessToken", accessToken);
 		
 		Gson gson = new Gson();
+		
 		String jsonStr = gson.toJson(claims);
 		
 		response.setContentType("application/json:charset=UTF-8");
